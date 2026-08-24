@@ -1,0 +1,321 @@
+Last Update: 24-08-2026 8:20 AM
+
+Index:
+
+Overall Flow: 
+1) Prepare the data & turn the data into a vector database
+2) Query the vector database
+3) Put all pieces together to form coherent response
+Original Text > Text Splitter > Chunks of Text > Embeddings 
+########################################################
+Section 101: Definition
+Section 1: Requirements Packages and their sizes
+Section 2: Commands Reference
+Section 3: Pip reference inside and outside venv 
+Section 4: VS code help
+Section 5: Installation and Debugging Journey
+Section 6: Python code Snippet
+Section 7: Kanban
+########################################################
+Section 101: Definition
+Embeddings: 
+	Vector representation of text that captures their meaning;
+	In PY, it just a list of numbers)
+	imagine as coordinates in multi-dimensational space; 
+	if 2 pieces of text are closely related in meaning, then those coordinates will be close together.
+	Distance between these vectors can be calculated easily with cosine similarity or euclidian distance.
+
+
+########################################################
+Section 1: Requirements Packages and their sizes
+Steps:
+
+# pip install langchain			#666/148 k
+pip install langchain-community
+
+pip install chromadb
+pip install langchain-classic
+pip install scikit-learn
+pip install sentence_transformers
+pip install -U langchain-openai
+pip install python-dotenv
+pip install langchain-ollama
+-----------
+[optional] 
+pip install unstructured 
+pip install pipdeptree
+
+########################################################
+Section 2: Commands Reference
+
+
+
+
+
+########################################################
+Section 3: Pip reference inside and outside venv  
+
+# Output of "pip list" after "pip install langchain" inside venv
+(.venv) C:\Users\Viyan\Exercism\RAGa>pip list
+Package              Version
+-------------------- ---------
+annotated-types      0.8.0
+anyio                4.14.2
+certifi              2026.7.22
+charset-normalizer   3.5.1
+distro               1.9.0
+h11                  0.16.0
+httpcore             1.0.9
+httpx                0.28.1
+idna                 3.19
+jsonpatch            1.33
+jsonpointer          3.1.1
+langchain            1.3.16
+langchain-core       1.6.0
+langchain-protocol   0.0.18
+langgraph            1.2.11
+langgraph-checkpoint 4.2.0
+langgraph-prebuilt   1.1.0
+langgraph-sdk        0.4.3
+langsmith            0.11.1
+orjson               3.12.0
+ormsgpack            1.12.2
+packaging            26.3
+pip                  26.2.1
+pydantic             2.13.4
+pydantic_core        2.46.4
+PyYAML               6.0.3
+requests             2.34.2
+requests-toolbelt    1.0.0
+sniffio              1.3.1
+tenacity             9.1.4
+typing_extensions    4.16.0
+typing-inspection    0.4.4
+urllib3              2.7.0
+uuid_utils           0.17.0
+websockets           16.1.1
+xxhash               4.0.1
+zstandard            0.25.0
+
+# Output of "pip list" after "pip install langchain" outside venv
+(.venv) C:\Users\Viyan\Exercism\RAGa>deactivate
+C:\Users\Viyan\Exercism\RAGa>pip list
+Package Version
+------- -------
+pip     26.2.1
+
+C:\Users\Viyan\Exercism\RAGa>
+
+
+# Output of "pip list" after "pip install langchain-community" inside venv
+
+(.venv) PS C:\Users\Viyan\Exercism\RAGa> pip list
+Package                  Version
+------------------------ ---------
+aiohappyeyeballs         2.7.1
+aiohttp                  3.14.3
+aiosignal                1.4.0
+annotated-types          0.8.0
+anyio                    4.14.2
+attrs                    26.1.0
+certifi                  2026.7.22
+charset-normalizer       3.5.1
+distro                   1.9.0
+frozenlist               1.8.0
+greenlet                 3.5.5
+h11                      0.16.0
+httpcore                 1.0.9
+httpx                    0.28.1
+httpx-sse                0.4.3
+idna                     3.19
+jsonpatch                1.33
+jsonpointer              3.1.1
+langchain                1.3.16
+langchain-classic        1.0.8
+langchain-community      0.4.2
+langchain-core           1.6.0
+langchain-protocol       0.0.18
+langchain-text-splitters 1.1.2
+langgraph                1.2.11
+langgraph-checkpoint     4.2.0
+langgraph-prebuilt       1.1.0
+langgraph-sdk            0.4.3
+langsmith                0.11.1
+multidict                6.7.1
+numpy                    2.5.2
+orjson                   3.12.0
+ormsgpack                1.12.2
+packaging                26.3
+pip                      26.2.1
+propcache                0.5.2
+pydantic                 2.13.4
+pydantic_core            2.46.4
+pydantic-settings        2.15.0
+python-dotenv            1.2.3
+PyYAML                   6.0.3
+requests                 2.34.2
+requests-toolbelt        1.0.0
+sniffio                  1.3.1
+SQLAlchemy               2.0.52
+tenacity                 9.1.4
+typing_extensions        4.16.0
+typing-inspection        0.4.4
+urllib3                  2.7.0
+uuid_utils               0.17.0
+websockets               16.1.1
+xxhash                   4.0.1
+yarl                     1.24.5
+zstandard                0.25.0
+(.venv) PS C:\Users\Viyan\Exercism\RAGa> 
+########################################################
+Section 4: VS code help
+
+# Uncomment to read execution in verbose mode
+#<># 
+
+# To open Interpreter Selector
+Ctrl+Shift+P
+
+# To go to command Terminal
+Ctrl + `: 
+
+# To activate venv and verify
+
+Linux: source venv/bin/activate
+Windows (PowerShell): .\venv\Scripts\Activate.ps1
+Windows (CMD): venv\Scripts\activate.bat
+
+> & c:/Users/Viyan/Exercism/RAGa/.venv/Scripts/Activate.ps1
+(.venv) PS C:\Users\Viyan\Exercism\RAGa> 
+
+Bottom Right corner: (e.g., 3.11.x ('venv': venv))
+
+# To exit venv 
+deactivate
+
+# To run selection
+Shift + Enter
+
+# The Difference Between Installing and Importing
+Installing (pip install): Done once per environment. It downloads the package files to your venv folder.
+Importing (import package): Done every time you start Python. It loads those downloaded files into your active session's memory so you can use them.
+
+#  In ChromaDB (using default L2 squared distance), a score above 1.0 means the match is weak. 
+
+# ML mode: ONNXMiniLM_L6_V2 and embedding_functions.DefaultEmbeddingFunction
+#  designed for general semantic matching.
+# 384-dimensional vectors
+Scenario B: Native Executables & Desktop Shipments (PyInstaller / Electron apps)Winner: ONNXMiniLM_L6_V2 (with explicit configurations)
+Scenario C: Bulk Document Ingestion & Local Hardware AccelerationWinner: ONNXMiniLM_L6_V2
+
+# cons: 
+The 256 Token Bottleneck: If you pass text fields longer than 256 tokens, the text cuts off abruptly. It is not designed to absorb long legal agreements or multi-page documentation without strict chunking setups.
+It is designed for general semantic matching. It often struggles with specialized search terms, complex JSON trees, or precise source code lookups. If your app requires heavy code analysis or multi-lingual search, switching to a more robust option (like text-embedding-3-small or BGE-M3) is highly recommended.
+
+
+
+
+# To search packages in pip
+pip show pandas
+pip list | grep "pandas"
+pip list | findstr "pandas"
+pip list | Select-string "pandas"
+
+# To search packages in Python
+print(module_name.__file__)     # Shows where it is installed
+print(module_name.__version__)  # Shows the version (if available)
+python -c "print('Important Data')" > output.txt
+
+# To perform quick tests like packages in Python, env var etc. 
+python -c "import sys; print(sys.executable)"
+python -c "import pandas; print(pandas.__version__)"
+
+# Suppress warning - CLI
+python -W ignore::DeprecationWarning raga.py
+
+# Suppress warning - script.py
+import warnings
+warnings.filterwarnings(
+    "ignore", 
+    message=".*langchain-community.*is being sunset.*", 
+    category=DeprecationWarning
+)
+
+python -W ignore::DeprecationWarning raga.py
+
+########################################################
+
+Section 5: Installation and Debugging Journey
+
+# segment
+>>> from langchain_community.document_loaders import DirectoryLoader
+...
+<python-input-2>:1: DeprecationWarning: `langchain-community` is being sunset and is no longer actively maintained. See https://github.com/langchain-ai/langchain-community/issues/674 for details and migration guidance toward standalone integration packages.
+
+# # Use unicode to ensure safe parsing of Smileys in Windows
+
+########################################################
+Section 6: Python code Snippet
+
+# print as txt
+
+# 1. Call your function to get the document objects
+docs = load_documents()
+
+# 2. Open a new text file and write the text content into it
+with open("output_documents.txt", "w", encoding="utf-8") as f:
+    for doc in docs:
+        f.write(f"Source: {doc.metadata.get('source', 'Unknown')}\n")
+        f.write(f"Content:\n{doc.page_content}\n")
+        f.write("-" * 40 + "\n\n")
+
+print("Output successfully saved to output_documents.txt")
+
+# print as json
+import json
+import pandas as pd
+
+# 1. Fetch your loaded documents
+docs = load_documents()
+
+# --- METHOD A: SAVE AS JSON ---
+# Structured dictionary comprehension to format data cleanly
+json_data = [
+    {
+        "source": doc.metadata.get("source", "Unknown"), 
+        "content": doc.page_content
+    } 
+    for doc in docs
+]
+
+with open("output_documents.json", "w", encoding="utf-8") as json_file:
+    json.dump(json_data, json_file, indent=4)
+
+print("Saved structured JSON to output_documents.json")
+
+# --- METHOD B: SAVE AS CSV ---
+# Pass the same dictionary list into a pandas DataFrame for instant tabular routing
+df = pd.DataFrame(json_data)
+df.to_csv("output_documents.csv", index=False, encoding="utf-8")
+
+print("Saved clean tabular dataset to output_documents.csv")
+
+########################################################
+Section 7: Kanban
+
+# Establish file size warning: Show estimated disk size consumption
+# Establish best parser strategy (installing heavy external dependencies, use Python's built-in text parser: TextLoader)
+# Cap/optimize folder /file imports using DirectoryLoader
+# Hunt Types of files: .MD, html, txt, pdf, csv, xlsx
+# Use Maraciaas Wiki and PuppetCentral as MD/webpage files
+# Troubleshooting Queries:
+	Does your 7.md file actually contain text explicitly describing the "second filter"?
+	What framework (like LangChain or raw Python) are you using to chunk and load your Markdown files?
+	Which embedding model are you currently using?
+	
+
+########################################################
+Section 8: Live Troubleshooting - Lesson Learned
+Because raga.py is utilizing DefaultEmbeddingFunction(), it cuts off strings at 256 tokens (~150–200 words). If raga.py reads 7.md as one massive string or in chunks that are way too big, the embedding model silently ignores everything after the first paragraph. The second filter gets erased before it even reaches the database vector space.
+
+To prevent truncation with ChromaDB’s default embedding model (all-MiniLM-L6-v2, which has a 256-token / ~1000-character safe limit),
